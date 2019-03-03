@@ -22,6 +22,7 @@ class SendMail{
 		$boundary = md5(uniqid(microtime(), TRUE));
 		 
 		$headers = 'From: '.$fromName.' <'.$fromMail.'>'."\r\n";
+		$headers .= 'Reply-To: '.  $fromMail . "\r\n";
 		$headers .= 'Mime-Version: 1.0'."\r\n";
 		$headers .= 'Content-Type: multipart/mixed;boundary='.$boundary."\r\n";
 		$headers .= "\r\n";
@@ -31,7 +32,7 @@ class SendMail{
 		$message .= $content."\r\n";
  
 		$message .= '--'.$boundary."\r\n";
-		 
+
 		mail($to, $subject, $message, $headers);
 	}
 }
